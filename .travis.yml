@@ -17,6 +17,8 @@ script:
   - docker logs jhipster
   - cd $TRAVIS_BUILD_DIR/travis/
   - ls -al
+  - docker exec -u jhipster -it jhipster ls -al /home/jhipster
+  - docker exec -u jhipster -it jhipster ls -al /home/jhipster/app
   - docker cp $TRAVIS_BUILD_DIR/travis/.yo-rc.json jhipster:/home/jhipster/app/
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster/app
