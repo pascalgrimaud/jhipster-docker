@@ -39,6 +39,7 @@ RUN npm install -g generator-jhipster@${JHIPSTER_VERSION}
 # configure the "jhipster" user
 RUN groupadd jhipster && useradd jhipster -s /bin/bash -m -g jhipster -G jhipster && adduser jhipster sudo
 RUN echo 'jhipster:jhipster' |chpasswd
+RUN mkdir -p /home/jhipster/app
 
 # add banner
 ADD banner.txt /home/jhipster/banner.txt
