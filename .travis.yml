@@ -8,5 +8,8 @@ install:
   - docker images
 script:
   - cd $TRAVIS_BUILD_DIR/travis/
-  - docker run -it --rm --user jhipster --name jhipster -v $PWD:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
+  - ls -al
+  - docker run --privileged -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
+  - echo $PWD
+  - docker run --privileged -it --rm --user jhipster --name jhipster -v $PWD:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
   - ls -al $TRAVIS_BUILD_DIR/travis/
