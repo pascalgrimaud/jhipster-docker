@@ -4,11 +4,14 @@ services:
 before_install:
   - sudo service docker restart ; sleep 10
 install:
+  - docker version
   - docker build -t jhipster/generator .
   - docker images
 script:
+  - echo $UID
+  - echo $PWD
   # - docker run --privileged=true -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
-  - docker run --privileged=true --name jhipster -w /home/jhipster/app -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app:rw -v $HOME/.m2:/home/jhipster/.m2:rw -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
+  - docker run --privileged=true --user jhipster --name jhipster -w /home/jhipster/app -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app:rw -v $HOME/.m2:/home/jhipster/.m2:rw -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
   - sleep 5
   - docker ps
   - docker logs jhipster
