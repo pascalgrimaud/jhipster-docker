@@ -16,6 +16,7 @@ script:
   - docker ps
   - docker logs jhipster
   - cd $TRAVIS_BUILD_DIR/travis/
+  - chmod 777 .yo-rc.json
   - ls -al
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster/app
