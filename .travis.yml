@@ -11,7 +11,7 @@ script:
   - echo $UID
   - echo $PWD
   # - docker run --privileged=true -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
-  - docker run --privileged=true -u jhipster --name jhipster -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
+  - docker run --privileged=true -u jhipster -w /home/jhipster/app --name jhipster -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
   - sleep 5
   - docker ps
   - docker logs jhipster
@@ -22,5 +22,5 @@ script:
   - docker cp $TRAVIS_BUILD_DIR/travis/.yo-rc.json jhipster:/home/jhipster/app/
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster/app
-  - docker exec -u jhipster -it jhipster "cd /home/jhipster/app && yo jhipster --force --no-insight"
+  - docker exec -u jhipster -it jhipster yo jhipster --force --no-insight
   - ls -al $TRAVIS_BUILD_DIR/travis/
