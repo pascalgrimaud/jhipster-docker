@@ -14,6 +14,6 @@ script:
   - docker logs jhipster
   - cd $TRAVIS_BUILD_DIR/travis/
   - ls -al
-  - docker exec --privileged=true -it --user=jhipster jhipster ls -al
-  - docker exec --privileged=true -it --user=jhipster jhipster yo jhipster --force --no-insight
+  - docker exec -it --user=jhipster jhipster ls -al
+  - docker exec -it --user=jhipster jhipster yo jhipster --force --no-insight
   - ls -al $TRAVIS_BUILD_DIR/travis/
