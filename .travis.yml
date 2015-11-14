@@ -8,7 +8,7 @@ install:
   - docker build -t jhipster/generator .
   - docker images
 script:
-  - docker run --name jhipster -w /home/jhipster/app -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
+  - docker run -u jhipster --name jhipster -w /home/jhipster/app -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
   - docker ps
   - docker logs jhipster
   - chmod -R 777 $TRAVIS_BUILD_DIR/travis
