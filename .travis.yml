@@ -9,5 +9,5 @@ install:
 script:
   - cd $TRAVIS_BUILD_DIR/travis/
   - ls -al
-  - docker run --privileged=true -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo --force --no-insight
+  - docker run --privileged=true -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
   - ls -al $TRAVIS_BUILD_DIR/travis/
