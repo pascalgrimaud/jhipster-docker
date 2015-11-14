@@ -8,19 +8,18 @@ install:
   - docker build -t jhipster/generator .
   - docker images
 script:
-  # - docker run --privileged=true -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
-  # - docker run -u jhipster -w /home/jhipster/app --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
   - docker run --name jhipster -w /home/jhipster/app -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
-  - sleep 5
   - docker ps
   - docker logs jhipster
   - cd $TRAVIS_BUILD_DIR/travis/
-  - chmod 777 .yo-rc.json
+  - chmod -R 777 $TRAVIS_BUILD_DIR/travis
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster/app
   - docker cp $TRAVIS_BUILD_DIR/travis/.yo-rc.json jhipster:/home/jhipster/app/
+  - docker cp $TRAVIS_BUILD_DIR/travis/insight-bower.json jhipster:/home/jhipster/.config/configstore/
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster/app
+  - docker exec -u jhipster -it jhipster ls -al /home/jhipster/.config/configstore/
   - docker exec -u jhipster -it jhipster yo jhipster --force --no-insight
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster/app
