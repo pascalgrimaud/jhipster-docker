@@ -7,8 +7,13 @@ install:
   - docker build -t jhipster/generator .
   - docker images
 script:
-  - su -c "setenforce 0"
+  # - docker run --privileged=true -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
+  - docker run --name jhipster -w /home/jhipster/app -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app:rw -v $HOME/.m2:/home/jhipster/.m2:rw -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jdubois/jhipster-docker
+  - sleep 5
+  - docker ps
+  - docker logs jhipster
   - cd $TRAVIS_BUILD_DIR/travis/
   - ls -al
-  - docker run --privileged=true -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
+  - docker exec -it --user=jhipster jhipster ls -al
+  - docker exec -it --user=jhipster jhipster yo jhipster --force --no-insight
   - ls -al $TRAVIS_BUILD_DIR/travis/
