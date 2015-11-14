@@ -1,3 +1,4 @@
+sudo: required
 os:
   - linux
 services:
@@ -10,12 +11,12 @@ script:
   - echo $UID
   - echo $PWD
   # - docker run --privileged=true -it --rm --user jhipster --name jhipster -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app -w /home/jhipster/app jhipster/generator yo jhipster --force --no-insight
-  - docker run --privileged=true -u $UID --name jhipster -w /home/jhipster/app -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/app:rw -v $HOME/.m2:/home/jhipster/.m2:rw -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
+  - docker run --privileged=true -u jhipster --name jhipster -w /home/jhipster/ -v $TRAVIS_BUILD_DIR/travis/:/home/jhipster/:rw -v $HOME/.m2:/home/jhipster/.m2:rw -p 8080:8080 -p 3000:3000 -p 3001:3001 -d -t jhipster/generator
   - sleep 5
   - docker ps
   - docker logs jhipster
   - cd $TRAVIS_BUILD_DIR/travis/
   - ls -al
-  - docker exec -u $UID -it jhipster ls -al
-  - docker exec -u $UID -it jhipster yo jhipster --force --no-insight
+  - docker exec -u jhipster -it jhipster ls -al
+  - docker exec -u jhipster -it jhipster "mkdir -p /home/jhipster/test && cd /home/jhipster/test && yo jhipster --force --no-insight"
   - ls -al $TRAVIS_BUILD_DIR/travis/
