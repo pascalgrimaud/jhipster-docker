@@ -1,8 +1,7 @@
-sudo: required
+os:
+  - linux
 services:
   - docker
-before_install:
-  - sudo service docker restart ; sleep 10
 install:
   - docker version
   - docker build -t jhipster/generator .
