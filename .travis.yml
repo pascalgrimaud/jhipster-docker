@@ -12,6 +12,7 @@ script:
   - chmod -R 777 $TRAVIS_BUILD_DIR/travis
   - docker cp $TRAVIS_BUILD_DIR/travis/.yo-rc.json jhipster:/home/jhipster/app/
   - docker cp $TRAVIS_BUILD_DIR/travis/.config jhipster:/home/jhipster/
+  - docker exec -u jhipster -it jhipster ls -al /home/jhipster /home/jhipster/app /home/jhipster/.config/configstore
   - docker exec -u jhipster -it jhipster yo jhipster --force --no-insight
   - docker exec -u jhipster -it jhipster ls -al /home/jhipster/app
   - docker images
